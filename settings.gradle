@@ -1,0 +1,1 @@
+include ':app', ':geeknews', ':sdk_wandroid', ':module_wandroid', ':data', ':lib_common', ':domain'

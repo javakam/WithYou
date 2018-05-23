@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navZhiHu"
+        android:title="@string/drawer_zhihu" />
+    <item
+        android:id="@+id/navWeiXin"
+        android:title="@string/drawer_weixin" />
+    <item
+        android:id="@+id/navGankIo"
+        android:title="@string/drawer_gank" />
+</menu>

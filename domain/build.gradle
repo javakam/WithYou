@@ -1,0 +1,71 @@
+apply plugin: 'com.android.library'
+
+def config = rootProject.ext.android                    //配置
+def library = rootProject.ext.dependencies              //依赖
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+
+        versionCode config.versionCode
+        versionName config.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //指定java版本，支持lambda表达式
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //ui
+    api library["constraint-layout"]
+    api library["recyclerview-v7"]
+    api library["cardview-v7"]
+    api library["material-calendarview"]
+    api library["materialsearchview"]
+    api library["multiline-collapsingtoolbar"]
+    api library["PhotoView"]
+    api library["glide-transformations"]
+    api library["html-textview"]
+
+    //di
+//    implementation library["dagger"]
+//    annotationProcessor library["dagger-compiler"]
+    api library["butterknife"]
+    annotationProcessor library["butterknife-compiler"]
+    provided library["annotation"]
+
+    //other
+    api library["multidex"]
+    api library["logger"]
+    api library["fragmentation"]
+    api library["crashreport"]
+
+    //canary
+    debugCompile library["blockcanary-android"]
+    releaseCompile library["blockcanary-no-op"]
+    debugCompile library["leakcanary-android"]
+    releaseCompile library["leakcanary-android-no-op"]
+
+    api project(':data')
+}
