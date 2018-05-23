@@ -4,7 +4,6 @@
  */
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
-apply plugin: 'com.jakewharton.butterknife'
 
 /*
 Android Studio2.3.3到3.0版本后，同时也更新了gradle到4.1后,出现问题：
@@ -189,6 +188,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    /*
+    注意，组件化在library中引入butterknife后，dependencies里library和app都要引入依赖才能生效，否则空指针
+    还有，library中使用R2.id.xxx ； app中 R.id.xxx
+    总之一句话，那个module/app需要用butterknife就在相应的build.gradle中引入如下两句代码
+     */
+    implementation library["butterknife"]
+    annotationProcessor library["butterknife-compiler"]
 
     api project(':module_wandroid')
 }

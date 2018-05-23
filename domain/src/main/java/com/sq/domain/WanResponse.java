@@ -1,4 +1,4 @@
-package com.sq.data.wandroid;
+package com.sq.domain;
 
 /**
  * WanAndroid网络请求基本数据结构

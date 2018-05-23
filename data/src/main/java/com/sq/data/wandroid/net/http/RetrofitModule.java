@@ -1,8 +1,8 @@
-package com.sq.domain.net.http;
+package com.sq.data.wandroid.net.http;
 
 import android.util.Log;
 
-import com.sq.domain.net.api.IWanApi;
+import com.sq.data.wandroid.net.api.IWanApi;
 
 import java.util.concurrent.TimeUnit;
 

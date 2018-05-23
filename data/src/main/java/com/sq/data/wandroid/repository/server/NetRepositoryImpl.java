@@ -1,9 +1,10 @@
-package com.sq.domain.repository.server;
+package com.sq.data.wandroid.repository.server;
 
-import com.sq.data.wandroid.WanResponse;
-import com.sq.data.wandroid.entity.HomeArticleListEntity;
-import com.sq.data.wandroid.repository.INetRepository;
-import com.sq.domain.net.api.IWanApi;
+
+import com.sq.data.wandroid.net.api.IWanApi;
+import com.sq.domain.WanResponse;
+import com.sq.domain.entity.HomeArticleListEntity;
+import com.sq.domain.repository.INetRepository;
 
 import java.util.HashMap;
 

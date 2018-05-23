@@ -1,31 +1,32 @@
-package com.sq.domain.repository;
+package com.sq.data.wandroid.repository;
 
 import android.util.Log;
 
-import com.sq.data.wandroid.WanResponse;
-import com.sq.data.wandroid.entity.HomeArticleListEntity;
-import com.sq.data.wandroid.repository.ILocalRepository;
-import com.sq.data.wandroid.repository.INetRepository;
+import com.sq.domain.WanResponse;
+import com.sq.domain.entity.HomeArticleListEntity;
+import com.sq.domain.repository.ILocalRepository;
+import com.sq.domain.repository.INetRepository;
 
 import io.reactivex.Flowable;
+
 
 /**
  * @author javakam
  * @date 2018-5-23
  */
-public final class Repository implements ILocalRepository, INetRepository {
+public final class DataInjection implements ILocalRepository, INetRepository {
     private ILocalRepository mLocalRepository;
     private INetRepository mServerRepository;
     private boolean isLocal;
 
-    private Repository() {
+    private DataInjection() {
     }
 
-    public Repository(INetRepository serverRepository) {
+    public DataInjection(INetRepository serverRepository) {
         this.mServerRepository = serverRepository;
     }
 
-    public Repository(INetRepository serverRepository, ILocalRepository localRepository) {
+    public DataInjection(INetRepository serverRepository, ILocalRepository localRepository) {
         this.mLocalRepository = localRepository;
         this.mServerRepository = serverRepository;
     }

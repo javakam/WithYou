@@ -1,6 +1,7 @@
-package com.sq.domain.repository.local;
+package com.sq.data.wandroid.repository.local;
 
-import com.sq.data.wandroid.repository.ILocalRepository;
+
+import com.sq.domain.repository.ILocalRepository;
 
 /**
  * Created by javakam on 2018/5/23.

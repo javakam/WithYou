@@ -1,4 +1,4 @@
-package com.sq.data.wandroid.entity;
+package com.sq.domain.entity;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package com.sq.domain.net.api;
+package com.sq.data.wandroid.net.api;
 
 
-import com.sq.data.wandroid.WanResponse;
-import com.sq.data.wandroid.entity.HomeArticleListEntity;
+import com.sq.domain.WanResponse;
+import com.sq.domain.entity.HomeArticleListEntity;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;

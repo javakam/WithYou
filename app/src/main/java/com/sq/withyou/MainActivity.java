@@ -19,12 +19,12 @@ import com.sq.withyou.dummy.DummyContent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
     @BindView(R.id.drawer)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.navigation)
     NavigationView mNavigationView;
-    @BindView(R.id.tool_bar)
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.navigation_bottom)
     BottomNavigationView navigation;
@@ -46,14 +46,14 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     }
 
     private void initViews() {
-        setToolBar(mToolbar, "知乎日报");
+        setToolBar(mToolbar, "首页");
         mNavigationView.getMenu().findItem(R.id.navZhiHu).setChecked(false);
         mNavigationView.setNavigationItemSelectedListener(mNavMenuItemSelListener);
         mToolbar.setTitle(mNavigationView.getMenu().findItem(R.id.navZhiHu).getTitle().toString());
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar
-                , R.string.drawer_open, R.string.drawer_close);
-        mDrawerToggle.syncState();
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
+//        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar
+//                , R.string.drawer_open, R.string.drawer_close);
+//        mDrawerToggle.syncState();
+//        mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         navigation.setOnNavigationItemSelectedListener(mNavBottomItemSelListener);
         BottomNavigationViewHelper.disableShiftMode(navigation);

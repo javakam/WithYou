@@ -1,4 +1,4 @@
-package com.sq.data.wandroid.repository;
+package com.sq.domain.repository;
 
 /**
  * Created by javakam on 2018/5/23.

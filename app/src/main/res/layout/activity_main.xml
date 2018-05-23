@@ -21,7 +21,9 @@
             android:theme="@android:style/ThemeOverlay.Material.ActionBar"
             app:elevation="@dimen/len_0">
 
-            <include layout="@layout/view_toolbar" />
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/view_toolbar" />
 
             <com.miguelcatalan.materialsearchview.MaterialSearchView
                 android:id="@+id/view_search"
