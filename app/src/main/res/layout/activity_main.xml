@@ -9,7 +9,6 @@
     tools:context="com.sq.withyou.MainActivity"
     tools:openDrawer="start">
 
-
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -28,14 +27,20 @@
             <com.miguelcatalan.materialsearchview.MaterialSearchView
                 android:id="@+id/view_search"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/fl_main_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <!--<include
+            android:id="@+id/main_content"
+            layout="@layout/drawer_right"
+            android:fitsSystemWindows="true" />-->
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation_bottom"
@@ -44,17 +49,16 @@
             android:layout_gravity="bottom"
             android:background="?android:attr/windowBackground"
             app:elevation="@dimen/len_16"
-
             app:menu="@menu/nav_bottom" />
-
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
+        android:id="@+id/navMenu"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/view_drawer_header"
-        app:itemBackground="@drawable/drawer_item_bg"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/drawer_left"
         app:menu="@menu/nav_left_menu" />
+
 </android.support.v4.widget.DrawerLayout>

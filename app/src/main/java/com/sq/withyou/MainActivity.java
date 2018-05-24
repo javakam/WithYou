@@ -14,22 +14,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
-import com.sq.withyou.dummy.DummyContent;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
     @BindView(R.id.drawer)
     DrawerLayout mDrawerLayout;
-    @BindView(R.id.navigation)
+    @BindView(R.id.navMenu)
     NavigationView mNavigationView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.navigation_bottom)
     BottomNavigationView navigation;
 
-    private ActionBarDrawerToggle mDrawerToggle;
+    private ActionBarDrawerToggle mDrawerListener;
     private MenuItem mLastMenuItem;
 
     @Override
@@ -41,30 +39,31 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         ButterKnife.bind(this);
         initViews();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fl_main_content, ItemFragment.newInstance(3));
+        transaction.add(R.id.fl_main_content, HomeFragment.newInstance(3));
         transaction.commit();
     }
 
     private void initViews() {
-        setToolBar(mToolbar, "首页");
-        mNavigationView.getMenu().findItem(R.id.navZhiHu).setChecked(false);
+        setToolBar("首页");
+//        mNavigationView.getMenu().findItem(R.id.navZhiHu).setChecked(false);
         mNavigationView.setNavigationItemSelectedListener(mNavMenuItemSelListener);
+
         mToolbar.setTitle(mNavigationView.getMenu().findItem(R.id.navZhiHu).getTitle().toString());
-//        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar
-//                , R.string.drawer_open, R.string.drawer_close);
-//        mDrawerToggle.syncState();
-//        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mDrawerListener = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar
+                , R.string.drawer_open, R.string.drawer_close);
+        mDrawerListener.syncState();
+        mDrawerLayout.addDrawerListener(mDrawerListener);
 
         navigation.setOnNavigationItemSelectedListener(mNavBottomItemSelListener);
         BottomNavigationViewHelper.disableShiftMode(navigation);
     }
 
-    protected void setToolBar(Toolbar toolbar, String title) {
-        toolbar.setTitle(title);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+    private void setToolBar(String title) {
+        mToolbar.setTitle(title);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                onBackPressedSupport();
@@ -74,7 +73,11 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         });
     }
 
-    private NavigationView.OnNavigationItemSelectedListener mNavMenuItemSelListener = new NavigationView.OnNavigationItemSelectedListener() {
+    /**
+     * 左侧菜单选择监听
+     */
+    private NavigationView.OnNavigationItemSelectedListener mNavMenuItemSelListener
+            = new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             if (mLastMenuItem != null) {
@@ -87,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             return false;
         }
     };
+    /**
+     * 底部导航监听
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener mNavBottomItemSelListener
             = item -> {
         switch (item.getItemId()) {
@@ -116,6 +122,10 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    protected void onDestroy() {
+        if (mDrawerLayout != null) {
+            mDrawerLayout.removeDrawerListener(mDrawerListener);
+        }
+        super.onDestroy();
     }
 }

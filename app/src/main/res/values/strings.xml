@@ -18,5 +18,8 @@
     <string name="drawer_group_content">资讯</string>
     <string name="drawer_menu_group_options">选项</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
