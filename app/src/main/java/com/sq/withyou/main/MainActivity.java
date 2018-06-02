@@ -14,6 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
+import com.sq.data.wandroid.net.http.RetrofitModule;
+import com.sq.data.wandroid.repository.Repository;
+import com.sq.data.wandroid.repository.server.NetRepositoryImpl;
+import com.sq.lib_common.base.BaseApplication;
 import com.sq.withyou.BottomNavigationViewHelper;
 import com.sq.withyou.R;
 import com.sq.withyou.home.HomeFragment;
@@ -60,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
         navigation.setOnNavigationItemSelectedListener(mNavBottomItemSelListener);
         BottomNavigationViewHelper.disableShiftMode(navigation);
+
+        // TODO: 2018/6/2   测试访问 -- 成功！！！
+        Repository mRepository = new Repository(new NetRepositoryImpl
+                (RetrofitModule.getRequestApi(BaseApplication.baseUrl)));
+        mRepository.getHomeArticleList(10);
     }
 
     private void setToolBar(String title) {
