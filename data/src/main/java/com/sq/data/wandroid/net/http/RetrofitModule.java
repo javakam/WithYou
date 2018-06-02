@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * @author javakam
  */
-public class RetrofitModule<T> {
+public class RetrofitModule {
     private final static int DEFUALT_TIME_OUT = 60;
     private static IWanApi sRequest;
 

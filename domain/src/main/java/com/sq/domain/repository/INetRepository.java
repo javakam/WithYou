@@ -10,5 +10,6 @@ import retrofit2.http.Path;
  * Created by javakam on 2018/5/23.
  */
 public interface INetRepository extends IRepository{
+
     Flowable<WanResponse<HomeArticleListEntity>> getHomeArticleList(@Path("num") int num);
 }

@@ -33,10 +33,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     //ui
     api library["constraint-layout"]
     api library["recyclerview-v7"]
@@ -47,13 +43,16 @@ dependencies {
     api library["PhotoView"]
     api library["glide-transformations"]
     api library["html-textview"]
+    api library["flowlayout-lib"]
+    api library["banner"]
+    api library["ultra-ptr"]
+    api library["swipebacklayout"]
 
     //di
 //    implementation library["dagger"]
 //    annotationProcessor library["dagger-compiler"]
     implementation library["butterknife"]
     annotationProcessor library["butterknife-compiler"]
-    provided library["annotation"]
 
     //other
     api library["BaseRecyclerViewAdapterHelper"]
@@ -61,6 +60,8 @@ dependencies {
     api library["logger"]
     api library["fragmentation"]
     api library["crashreport"]
+    api library["eventbus"]
+    annotationProcessor library["eventbus-annotation-processor"]
 
     //canary
     debugCompile library["blockcanary-android"]

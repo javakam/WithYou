@@ -4,6 +4,7 @@ package com.sq.domain.repository;
  * Created by javakam on 2018/5/23.
  */
 public interface IRepository {
+    String TAG="123";
     /**
      * 用户登录
      *

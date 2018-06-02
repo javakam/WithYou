@@ -32,10 +32,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //unit test
+    testApi library["junit"]
+    androidTestApi library["test-runner"]
+    androidTestApi library["test-espresso-core"]
 
     //base
     api library["support-v4"]
@@ -46,16 +46,30 @@ dependencies {
     api library["rxjava"]
     api library["rxandroid"]
     api library["rxpermissions"]
+    api library["rxbinding"]
+    api library["rxerrorhandler"]
 
     //network
     api library["gson"]
     api library["retrofit"]
     api library["retrofit-converter-gson"]
     api library["retrofit-adapter-rxjava2"]
+    //支持xml数据解析
+    api("com.squareup.retrofit2:converter-simplexml:2.4.0")
+            {
+                exclude module: 'stax'
+                exclude module: 'stax-api'
+                exclude module: 'xpp3'
+            }
     api library["okhttp"]
     api library["okhttp-logging-interceptor"]
     api library["glide"]
+    annotationProcessor library["glide-compiler"]
     api library["glide-okhttp3-integration"]
     api library["jsoup"]
+    //other
+    api library["timber"]
+    api library["logger"]
+
 
 }

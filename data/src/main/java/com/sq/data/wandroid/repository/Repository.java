@@ -14,19 +14,19 @@ import io.reactivex.Flowable;
  * @author javakam
  * @date 2018-5-23
  */
-public final class DataInjection implements ILocalRepository, INetRepository {
+public final class Repository implements ILocalRepository, INetRepository {
     private ILocalRepository mLocalRepository;
     private INetRepository mServerRepository;
     private boolean isLocal;
 
-    private DataInjection() {
+    private Repository() {
     }
 
-    public DataInjection(INetRepository serverRepository) {
+    public Repository(INetRepository serverRepository) {
         this.mServerRepository = serverRepository;
     }
 
-    public DataInjection(INetRepository serverRepository, ILocalRepository localRepository) {
+    public Repository(INetRepository serverRepository, ILocalRepository localRepository) {
         this.mLocalRepository = localRepository;
         this.mServerRepository = serverRepository;
     }

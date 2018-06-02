@@ -1,4 +1,4 @@
-package com.sq.withyou;
+package com.sq.withyou.main;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+
+import com.sq.withyou.BottomNavigationViewHelper;
+import com.sq.withyou.R;
+import com.sq.withyou.home.HomeFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
