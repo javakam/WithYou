@@ -14,11 +14,11 @@ public abstract class MvpFragment<P extends IPresenter> extends BaseFragment imp
     protected abstract void initPresenter();
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         initPresenter();
         if (mPresenter != null) {
-            mPresenter.attachView(MvpFragment.this);
+            mPresenter.attachView(this);
         }
     }
 

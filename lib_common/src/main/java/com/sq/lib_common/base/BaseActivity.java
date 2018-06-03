@@ -50,8 +50,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             mUnbinder = ButterKnife.bind(this);
         }
         initVariables();
-        initViews();
-        initData(savedInstanceState);
     }
 
     /**
@@ -63,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param toolBarTitleId
      * @param title
      */
-    protected void setUpToolBar(@IdRes int toolbarId, @IdRes int toolBarTitleId, String title) {
+    protected void setUpToolBar(@IdRes int toolbarId, @IdRes int toolBarTitleId, @Nullable String title) {
         Toolbar toolbar = findViewById(toolbarId);
         TextView toolBarTitle = toolbar.findViewById(toolBarTitleId);
         toolBarTitle.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
@@ -84,9 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initVariables();
 
-    protected abstract void initViews();
-
-    protected abstract void initData(Bundle savedInstanceState);
+    protected abstract void initViews(Bundle savedInstanceState);
 
     /**
      * 设置是否显示状态栏

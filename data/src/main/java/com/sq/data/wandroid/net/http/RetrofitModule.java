@@ -41,14 +41,15 @@ public class RetrofitModule {
                 // 新的请求
                 Request newRequest = oldRequest.newBuilder()
                         .method(oldRequest.method(), oldRequest.body())
-                        //来自1：iOS, 2:Android, 3:web
-                        .header("registeredChannels", "2")
+                        //请求头增加字段表明来源：1：iOS, 2:Android, 3:web
+//                        .header("registeredChannels", "2")
                         .url(authorizedUrlBuilder.build())
                         .build();
                 return chain.proceed(newRequest);
             };
             //打印拦截器
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor(message -> Log.d("yff", message));
+            HttpLoggingInterceptor logging =
+                    new HttpLoggingInterceptor(message -> Log.d("123", message));
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
             OkHttpClient httpClient = new OkHttpClient.Builder()

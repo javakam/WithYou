@@ -2,54 +2,73 @@ package com.sq.withyou.home;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.sq.data.wandroid.net.http.RetrofitModule;
-import com.sq.data.wandroid.repository.Repository;
-import com.sq.data.wandroid.repository.server.NetRepositoryImpl;
-import com.sq.lib_common.base.BaseApplication;
+import com.google.gson.Gson;
+import com.sq.domain.entity.HomeArticleEntity;
+import com.sq.domain.entity.HomeArticleListEntity;
 import com.sq.lib_common.base.BaseIndicateFragment;
+import com.sq.lib_common.mvp.MvpFragment;
+import com.sq.lib_common.utils.ACache;
+import com.sq.lib_common.utils.GsonUtils;
+import com.sq.lib_common.utils.NetUtils;
+import com.sq.withyou.Constant;
 import com.sq.withyou.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link BaseIndicateFragment} subclass.
  */
-public class HomeFragment extends BaseIndicateFragment {
+public class HomeFragment extends MvpFragment<HomePresenter> implements HomeContract.HomeView {
     @BindView(R.id.rv_home)
     protected RecyclerView mRecyclerView;
-    private Unbinder mUnbinder;
+    private HomeAdapter adapter;
+    private List<HomeArticleEntity> mArticles;
+    private ACache aCache;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mUnbinder = ButterKnife.bind(this, view);
-        return view;
-    }
-
-    @OnClick(R.id.btGetWanHome)
-    public void getWanHome(View view) {
-        Repository mRepository = new Repository(new NetRepositoryImpl
-                (RetrofitModule.getRequestApi(BaseApplication.baseUrl)));
-        mRepository.getHomeArticleList(10);
-
+    protected int getContentId() {
+        return R.layout.fragment_home;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mUnbinder != Unbinder.EMPTY) {
-            mUnbinder.unbind();
+    protected void initPresenter() {
+        mPresenter = new HomePresenter(mActivity);
+    }
+
+    @Override
+    protected void initVariable(@Nullable Bundle savedInstanceState) {
+        aCache = ACache.get(mActivity);
+    }
+
+    @Override
+    protected void initView() {
+        mArticles = new ArrayList<>();
+        if (!NetUtils.isConnected()) {
+            mArticles = GsonUtils.fromJson(aCache.getAsString(Constant.CACHE_HOME_ARTICLE));
+        } else {
+            mPresenter.getHomeArticleList();
         }
+        adapter = new HomeAdapter(R.layout.item_home_list, mArticles);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+
+    }
+
+    @Override
+    public void showCollectList(HomeArticleListEntity homeArticleEntity) {
+        if (homeArticleEntity == null) {
+            return;
+        }
+        mArticles = homeArticleEntity.getDatas();
+        aCache.put(Constant.CACHE_HOME_ARTICLE, new Gson().toJson(mArticles));
+        adapter.setNewData(mArticles);
     }
 }

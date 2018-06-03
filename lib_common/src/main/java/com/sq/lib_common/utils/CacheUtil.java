@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.LruCache;
 import android.view.View;
 
-import com.sq.lib_common.Constant;
+import com.sq.lib_common.Global;
 
 
 /**
@@ -54,7 +54,7 @@ public class CacheUtil {
 
     public static void initCache() {
         mCache = ACache.get(context);
-        lruCache = new LruCache<>(Constant.LRUCACHE_MAX_SIZE);
+        lruCache = new LruCache<>(Global.LRUCACHE_MAX_SIZE);
     }
 
     /**

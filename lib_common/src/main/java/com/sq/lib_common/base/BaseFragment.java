@@ -66,7 +66,6 @@ public abstract class BaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        initData();
         isActivityCreated = true;
     }
 
@@ -89,11 +88,6 @@ public abstract class BaseFragment extends Fragment {
      * 初始化view
      */
     protected abstract void initView();
-
-    /**
-     * 初始化数据
-     */
-    protected abstract void initData();
 
     protected void showSuccessDialog(CharSequence message) {
         if (TextUtils.isEmpty(message)) {

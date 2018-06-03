@@ -2,9 +2,8 @@ package com.sq.lib_common.mvp;
 
 import android.content.Context;
 
-import com.sq.data.wandroid.net.http.RetrofitModule;
 import com.sq.data.wandroid.repository.Repository;
-import com.sq.data.wandroid.repository.server.NetRepositoryImpl;
+import com.sq.lib_common.Global;
 import com.sq.lib_common.base.BaseApplication;
 
 import java.lang.ref.Reference;
@@ -21,19 +20,20 @@ import io.reactivex.disposables.Disposable;
  * @date 2018-6-2 17:49:32
  */
 public abstract class BasePresenter<T extends BaseView> implements IPresenter<T> {
+    public static final String TAG = Global.TAG;
     /**
      * Presenter持有View层的实例引用,为了防止内存泄露采用弱应用的形式保存
      */
     private Reference<T> mViewRef;
     private Context mContext;
     private CompositeDisposable mCompositeDisposable;
-    private Repository mRepository;
+    public Repository mRepository;
 
     public BasePresenter(Context context) {
         this.mContext = context;
+        //  java.lang.NoClassDefFoundError: Failed resolution of: Lcom/sq/data/wandroid/repository/Repository;
         //todo 默认使用的是WANAndroid的baseUrl
-        mRepository = new Repository(new NetRepositoryImpl
-                (RetrofitModule.getRequestApi(BaseApplication.baseUrl)));
+        this.mRepository = Repository.getInstance(BaseApplication.baseUrl);
     }
 
     @Override

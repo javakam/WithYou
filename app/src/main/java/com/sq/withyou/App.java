@@ -2,16 +2,17 @@ package com.sq.withyou;
 
 
 import com.sq.lib_common.base.BaseApplication;
+import com.sq.lib_common.utils.Utils;
 
 /**
  * Created by javakam on 2018/5/23.
  */
 public class App extends BaseApplication {
-    private static App instance=new App();
-
-    public static synchronized App getInstance() {
-        return instance;
-    }
+//    private static App instance=new App();
+//
+//    public static synchronized App getInstance() {
+//        return instance;
+//    }
 
 //    static {
 //        AppCompatDelegate.setDefaultNightMode(
@@ -21,6 +22,6 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        Utils.init(this);
     }
 }

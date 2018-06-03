@@ -12,13 +12,18 @@ import com.sq.lib_common.base.BaseActivity;
 public abstract class MvpActivity<P extends IPresenter> extends BaseActivity implements BaseView {
     protected P mPresenter;
 
+    /**
+     * 初始化presenter层
+     */
+    protected abstract void initPresenter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initPresenter();
+        initViews(savedInstanceState);
         if (mPresenter != null) {
-            mPresenter.attachView(MvpActivity.this);
+            mPresenter.attachView(this);
         }
         //恢复离线和在线系统标识
         if (savedInstanceState != null && mPresenter != null) {
@@ -28,11 +33,6 @@ public abstract class MvpActivity<P extends IPresenter> extends BaseActivity imp
 //            StatusBarCompat.compat(this);
         }
     }
-
-    /**
-     * 初始化presenter层
-     */
-    protected abstract void initPresenter();
 
     @Override
     protected void onDestroy() {
@@ -46,6 +46,4 @@ public abstract class MvpActivity<P extends IPresenter> extends BaseActivity imp
         }
         mView = null;
     }
-
-
 }
