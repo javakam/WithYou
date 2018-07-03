@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.sq.lib_common.mvp.MvpActivity;
-import com.sq.withyou.BottomNavigationViewHelper;
+import com.sq.withyou.util.BottomNavigationViewHelper;
 import com.sq.withyou.R;
 import com.sq.withyou.home.HomeFragment;
 

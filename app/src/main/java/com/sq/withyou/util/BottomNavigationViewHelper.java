@@ -1,4 +1,4 @@
-package com.sq.withyou;
+package com.sq.withyou.util;
 
 import android.annotation.SuppressLint;
 import android.support.design.internal.BottomNavigationItemView;
